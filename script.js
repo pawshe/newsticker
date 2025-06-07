@@ -50,19 +50,35 @@ class GoogleRssNewsTicker {
     }
     
     async loadNews(category) {
-    this.tickerElement.innerHTML = '<div class="loading-message">Loading news headlines...</div>';
-    this.state.newsItems = [];
-    
-    try {
-        const feedUrl = this.rssFeeds[category];
-        const apiKey = 'kldcpntkrgafvpdevdjsq9lhltdg7zcegitj1eeo'; // ← Replace with your actual key
-        const response = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&api_key=${kldcpntkrgafvpdevdjsq9lhltdg7zcegitj1eeo}`
-        );
+        this.tickerElement.innerHTML = '<div class="loading-message">Loading news headlines...</div>';
+        this.state.newsItems = [];
         
-        // Rest of the code remains the same...
+        try {
+            const feedUrl = this.rssFeeds[category];
+            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`);
+            const data = await response.json();
+            
+            if (data.items && data.items.length) {
+                this.state.newsItems = data.items.map(item => ({
+                    title: item.title,
+                    link: item.link,
+                    pubDate: new Date(item.pubDate)
+                }));
+                
+                this.renderTickerItems();
+                this.setupSeamlessLoop();
+                
+                if (!this.state.isPaused) {
+                    this.play();
+                }
+            } else {
+                this.showErrorMessage('No news items found');
+            }
+        } catch (error) {
+            console.error('Error fetching news:', error);
+            this.showErrorMessage('Failed to load news feed');
+        }
     }
-}
     
     renderTickerItems() {
         this.tickerElement.innerHTML = '';
