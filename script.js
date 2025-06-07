@@ -57,7 +57,7 @@ class GoogleRssNewsTicker {
         const feedUrl = this.rssFeeds[category];
         const apiKey = 'kldcpntkrgafvpdevdjsq9lhltdg7zcegitj1eeo'; // ← Replace with your actual key
         const response = await fetch(
-            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&api_key=${apiKey}`
+            `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&api_key=${kldcpntkrgafvpdevdjsq9lhltdg7zcegitj1eeo}`
         );
         
         // Rest of the code remains the same...
