@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google RSS News Ticker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="news-ticker-container">
+        <div class="ticker-header">
+            <span class="ticker-title">LATEST NEWS</span>
+            <div class="ticker-controls">
+                <button id="pauseBtn" class="control-btn" aria-label="Pause ticker">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button id="prevBtn" class="control-btn" aria-label="Previous news">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button id="nextBtn" class="control-btn" aria-label="Next news">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+        </div>
+        <div class="ticker-wrapper">
+            <div class="ticker" id="newsTicker">
+                <div class="loading-message">Loading news headlines...</div>
+            </div>
+        </div>
+        <div class="news-categories">
+            <button class="category-btn active" data-category="world">World</button>
+            <button class="category-btn" data-category="business">Business</button>
+            <button class="category-btn" data-category="technology">Technology</button>
+            <button class="category-btn" data-category="science">Science</button>
+            <button class="category-btn" data-category="health">Health</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
